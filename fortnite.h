@@ -30,22 +30,22 @@ int fortniteLoadShop(FortniteItem arr[], int howMany);
 //---------------
 
 //Nível 1
-//bool fortniteItemBuy(const char* name, FortniteItem arr[], int arrLength);
+bool fortniteItemBuy(const char* name, FortniteItem arr[], int arrLength);
 
 //Nível 2
-//PtFortniteItem fortniteItemSearch(const char* name, FortniteItem arr[], int arrLength);
+PtFortniteItem fortniteItemSearch(const char* name, FortniteItem arr[], int arrLength);
 
 //Nível 3
-//FortniteItem* fortniteArrayCopy(FortniteItem arr[], int arrLength);
+FortniteItem* fortniteArrayCopy(FortniteItem arr[], int arrLength);
 
 //Nível 4
-//FortniteItem* fortniteFindFreeItems(FortniteItem arr[], int arrLength, int *itemSize);
+FortniteItem* fortniteFindFreeItems(FortniteItem arr[], int arrLength, int *itemSize);
 //adaptação - critério de seleção
-//FortniteItem* fortniteFindRarityItems(FortniteItem arr[], int arrLength, const char* rarity, int *itemSize);
+FortniteItem* fortniteFindRarityItems(FortniteItem arr[], int arrLength, const char* rarity, int *itemSize);
 
 
 //Nível 5
-//bool fortniteAddNewItem(FortniteItem item, FortniteItem *arr[], int *pArrLength);
+bool fortniteAddNewItem(FortniteItem item, FortniteItem *arr[], int *pArrLength);
 
 
 
