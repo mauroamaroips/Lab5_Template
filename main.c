@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h>
+#include <string.h>
 #include "input.h"
 #include "fortnite.h"
 
@@ -36,33 +37,49 @@ int main() {
 
     //Nível 3
 
-    FortniteItem* newArr = fortniteArrayCopy(shop, shopSize);
-    fortniteArrayPrint(newArr, shopSize);
-
-    free(newArr);
+    FortniteItem* shopCopy = fortniteArrayCopy(shop, shopSize);
+    fortniteArrayPrint(shopCopy, shopSize);
 
     //Nível 4
     
     int itemSize = 0;
-    FortniteItem* newFreeItems = fortniteFindFreeItems(shop, shopSize, &itemSize);
+    FortniteItem* freeItems = fortniteFindFreeItems(shop, shopSize, &itemSize);
     //printf("%d", itemSize); Print value on address
-    fortniteArrayPrint(newFreeItems, itemSize);
+    fortniteArrayPrint(freeItems, itemSize);
 
 
     for (int i = 0; i < shopSize; i++)
     {
-        fortniteItemBuy(newFreeItems[i].name, shop, shopSize);
+        fortniteItemBuy(freeItems[i].name, shop, shopSize);
     }
 
     fortniteArrayPrint(shop, shopSize);
 
-    free(newFreeItems);
-
     //Nível 4 - 11
 
-    FortniteItem* newRarityItems = fortniteFindRarityItems(shop,shopSize,"Rare", &itemSize);
+    FortniteItem* items = fortniteFindRarityItems(shop,shopSize,"Rare", &itemSize);
     printf("%d\n", itemSize); //Print value on address
-    fortniteArrayPrint(newRarityItems, itemSize);
+    fortniteArrayPrint(items, itemSize);
+
+    //Nível 5
+    printf("Adding a new item to the shop...\n");
+
+    FortniteItem newItem = fortniteItemCreate("Spider Gwen", "Legendary", 2000);
+    //FortniteItem newItem = fortniteItemCreate("NBA Beacon", "Rare", 400);
+
+    int success = fortniteAddNewItem(newItem, &shopCopy, &shopSize);
+    //success = fortniteAddNewItem(newItem, &shop, &shopSize);
+
+    if(success) {
+        fortniteArrayPrint(shopCopy, shopSize);
+        //fortniteArrayPrint(shop, shopSize);
+    } else {
+        printf("Não foi possível adicionar o novo item à shop! \n");
+    }
+
+    free(freeItems);
+    free(items);
+    free(shopCopy);
 
     return EXIT_SUCCESS;
 }

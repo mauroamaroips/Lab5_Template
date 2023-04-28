@@ -72,16 +72,10 @@ bool fortniteItemBuy(const char* name, FortniteItem arr[], int arrLength){
 
 PtFortniteItem fortniteItemSearch(const char* name, FortniteItem arr[], int arrLength){
 
-    FortniteItem *ptrItem;
-
-    for (int i = 0; i < arrLength; i++)
-    {
-        if(strcmp(arr[i].name, name) == 0){
-            ptrItem = &arr[i];
-            return ptrItem;
-        } 
+    for (int i = 0; i < arrLength; i++) {
+        if(strcmp(arr[i].name, name) == 0) return &arr[i];
     }
-    return ptrItem = NULL;
+    return NULL;
 }
 
 //Nível 3
@@ -132,7 +126,7 @@ FortniteItem* fortniteArrayCopy(FortniteItem arr[], int arrLength){
         
     }
 
-//Nível 5
+//Nível 4
 
 FortniteItem* fortniteFindRarityItems(FortniteItem arr[], int arrLength, const char* rarity, int *itemSize){
 
@@ -162,10 +156,23 @@ FortniteItem* fortniteFindRarityItems(FortniteItem arr[], int arrLength, const c
 
 bool fortniteAddNewItem(FortniteItem item, FortniteItem *arr[], int *pArrLength){
 
-    PtFortniteItem arr2 = *arr;
-    int length = *pArrLength;
-    
-    FortniteItem *newArr = (FortniteItem *) calloc(*pArrLength, sizeof (FortniteItem));
+    PtFortniteItem findItem = fortniteItemSearch(item.name, *arr, *pArrLength);
+
+    if(findItem != NULL) return false;
+
+    int newLength = *pArrLength + 1;
+
+    FortniteItem* newArray = (PtFortniteItem) realloc(*arr, newLength * sizeof(FortniteItem));
+    if (newArray == NULL) return false;
+
+    newArray[newLength-1] = item;
+
+    //Atualizar novos valores
+
+    *arr = newArray;
+    *pArrLength = newLength;
+
+    return true;
 
 }
 
